@@ -1,4 +1,4 @@
-require 'gemwhisperer'
+require File.expand_path('../gemwhisperer', __FILE__)
 
 namespace :db do
   desc 'Migrate the database'
