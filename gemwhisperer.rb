@@ -48,12 +48,20 @@ get '/' do
   erb :index
 end
 
-post "/#{ENV['SECRET_ENDPOINT_URL']}" do
+post '/hook' do
   data = request.body.read
   Log.info "got webhook: #{data}"
 
   hash = JSON.parse(data)
   Log.info "parsed json: #{hash.inspect}"
+
+  authorization = Digest::SHA2.hexdigest(hash['name'] + hash['version'] + ENV['RUBYGEMS_API_KEY'])
+  if headers['Authorization'] == authorization
+    Log.info "authorized: #{headers['Authorization']}"
+  else
+    Log.info "unauthorized: #{headers['Authorization']}"
+    error 401
+  end
 
   whisper = Whisper.create(
     :name    => hash['name'],
