@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 require 'sinatra'
 require 'active_record'
 require 'sqlite3'
@@ -75,11 +77,7 @@ post '/hook' do
   Log.info "shorted url: #{short_url}"
 
   whisper_text = "#{whisper.name} (#{whisper.version}): #{short_url} #{whisper.info}"
-
-  if whisper_text.length > 140
-    #the use of an unescaped ellipses in the source works in ruby 1.8.7 but breaks in my testing using 1.9.2, presumably due to the encoding of the source file
-    whisper_text = whisper_text[0,139] + '…'
-  end
+  whisper_text = whisper_text[0, 139] + '…' if whisper_text.length > 140
 
   response = Twitter.update(whisper_text)
   Log.info "TWEETED! #{response}"
