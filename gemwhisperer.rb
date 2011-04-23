@@ -58,10 +58,10 @@ post '/hook' do
   Log.info "parsed json: #{hash.inspect}"
 
   authorization = Digest::SHA2.hexdigest(hash['name'] + hash['version'] + ENV['RUBYGEMS_API_KEY'])
-  if headers['Authorization'] == authorization
-    Log.info "authorized: #{headers['Authorization']}"
+  if env['HTTP_AUTHORIZATION'] == authorization
+    Log.info "authorized: #{env['HTTP_AUTHORIZATION']}"
   else
-    Log.info "unauthorized: #{headers['Authorization']}"
+    Log.info "unauthorized: #{env['HTTP_AUTHORIZATION']}"
     error 401
   end
 
