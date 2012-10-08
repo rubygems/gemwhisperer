@@ -43,6 +43,12 @@ configure :production do
 end
 
 class Whisper < ActiveRecord::Base
+  def self.trim_table
+    connection.execute <<-SQL
+DELETE FROM whispers
+WHERE id NOT IN (SELECT id FROM whispers ORDER BY created_at DESC LIMIT 50);
+    SQL
+  end
 end
 
 get '/' do
@@ -71,6 +77,9 @@ post '/hook' do
     :url     => hash['project_uri'],
     :info    => hash['info']
   )
+
+  Whisper.trim_table
+
   Log.info "created whisper: #{whisper.inspect}"
 
   short_url = Net::HTTP.get(URI.parse("http://is.gd/create.php?format=simple&url=#{URI.escape(whisper.url)}"))
