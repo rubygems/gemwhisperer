@@ -2,3 +2,5 @@
 *.db
 config/application.yml
 log/*.log
+.bundle
+bin/*
