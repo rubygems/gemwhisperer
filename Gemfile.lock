@@ -20,7 +20,6 @@ GEM
     json (1.5.1)
     multi_json (1.5.0)
     multipart-post (1.2.0)
-    pg (0.15.1)
     rack (1.2.1)
     simple_oauth (0.2.0)
     sinatra (1.1.3)
@@ -40,7 +39,6 @@ PLATFORMS
 DEPENDENCIES
   activerecord (~> 3.2.11)
   json (~> 1.5.1)
-  pg (~> 0.11)
   sinatra (~> 1.1.3)
   sqlite3 (~> 1.3.6)
   twitter (~> 4.8.1)
