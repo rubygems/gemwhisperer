@@ -30,6 +30,8 @@ configure do
   ActiveRecord::Base.logger = Log
 end
 
+set :root, File.dirname(__FILE__)
+
 configure :development do
   ActiveRecord::Base.establish_connection(
     :adapter  => 'sqlite3',
