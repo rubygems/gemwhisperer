@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
+
 gem 'sinatra', '~> 1.1.3'
 gem 'activerecord', '~> 3.2.11'
 gem 'pg', '~> 0.15.1'

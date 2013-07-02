@@ -2,7 +2,6 @@
 
 require 'sinatra'
 require 'active_record'
-require 'sqlite3'
 require 'twitter'
 require 'json'
 
@@ -33,6 +32,8 @@ end
 set :root, File.dirname(__FILE__)
 
 configure :development do
+  require 'sqlite3'
+
   ActiveRecord::Base.establish_connection(
     :adapter  => 'sqlite3',
     :database => 'db/development.db'
