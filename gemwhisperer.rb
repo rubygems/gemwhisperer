@@ -41,7 +41,7 @@ configure :development do
 end
 
 configure :production do
-  creds = YAML.load_file('config/database.yml')['production']
+  creds = YAML.load(ERB.new(File.read('config/database.yml')).result)['production']
   ActiveRecord::Base.establish_connection(creds)
 end
 
