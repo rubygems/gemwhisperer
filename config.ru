@@ -1,3 +1,3 @@
-require File.expand_path('../gemwhisperer', __FILE__)
+require './gemwhisperer'
 
 run Sinatra::Application

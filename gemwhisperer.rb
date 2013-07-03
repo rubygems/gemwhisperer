@@ -2,7 +2,6 @@
 
 require 'sinatra'
 require 'active_record'
-require 'sqlite3'
 require 'twitter'
 require 'json'
 
@@ -25,12 +24,16 @@ Twitter.configure do |config|
 end
 
 configure do
-  Log = Logger.new("log/#{ENV['RACK_ENV']}.log")
+  Log = Logger.new(STDOUT)
   Log.level = Logger::INFO
   ActiveRecord::Base.logger = Log
 end
 
+set :root, File.dirname(__FILE__)
+
 configure :development do
+  require 'sqlite3'
+
   ActiveRecord::Base.establish_connection(
     :adapter  => 'sqlite3',
     :database => 'db/development.db'
@@ -38,7 +41,7 @@ configure :development do
 end
 
 configure :production do
-  creds = YAML.load_file('config/database.yml')['production']
+  creds = YAML.load(ERB.new(File.read('config/database.yml')).result)['production']
   ActiveRecord::Base.establish_connection(creds)
 end
 
