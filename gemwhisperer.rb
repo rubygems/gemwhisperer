@@ -24,7 +24,7 @@ Twitter.configure do |config|
 end
 
 configure do
-  Log = Logger.new("log/#{ENV['RACK_ENV']}.log")
+  Log = Logger.new(STDOUT)
   Log.level = Logger::INFO
   ActiveRecord::Base.logger = Log
 end
