@@ -33,7 +33,7 @@ GEM
       faraday (~> 0.8, < 0.10)
       multi_json (~> 1.0)
       simple_oauth (~> 0.2)
-    tzinfo (0.3.38)
+    tzinfo (0.3.39)
 
 PLATFORMS
   ruby
