@@ -85,10 +85,7 @@ post '/hook' do
 
   Log.info "created whisper: #{whisper.inspect}"
 
-  short_url = Net::HTTP.get(URI.parse("http://is.gd/create.php?format=simple&url=#{URI.escape(whisper.url)}"))
-  Log.info "shorted url: #{short_url}"
-
-  whisper_text = "#{whisper.name} (#{whisper.version}): #{short_url} #{whisper.info}"
+  whisper_text = "#{whisper.name} (#{whisper.version}): #{whisper.url} #{whisper.info}"
   whisper_text = whisper_text[0, 120] + '…' if whisper_text.length > 140
 
   response = Twitter.update(whisper_text)
