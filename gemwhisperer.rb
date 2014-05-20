@@ -2,6 +2,7 @@
 
 require 'sinatra'
 require 'active_record'
+require 'active_support/core_ext/string/filters'
 require 'twitter'
 require 'json'
 
@@ -85,8 +86,8 @@ post '/hook' do
 
   Log.info "created whisper: #{whisper.inspect}"
 
-  whisper_text = "#{whisper.name} (#{whisper.version}): #{whisper.url} #{whisper.info}"
-  whisper_text = whisper_text[0, 120] + '…' if whisper_text.length > 140
+  # Maximum length of a tweet sans URL is currently 140 characters - 22 (short URL length) - 1 space = 117 characters
+  whisper_text = "#{whisper.name} (#{whisper.version}): #{whisper.info}".truncate(117, :omission => "…", :separator => " ") + " #{whisper.url}"
 
   response = $twitter.update(whisper_text)
   Log.info "TWEETED! #{response}"
