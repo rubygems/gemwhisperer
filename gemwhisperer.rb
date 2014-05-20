@@ -16,11 +16,11 @@ if File.exist?('config/application.yml')
   config.each{|k,v| ENV[k] = v }
 end
 
-Twitter.configure do |config|
-  config.consumer_key       = ENV['CONSUMER_KEY']
-  config.consumer_secret    = ENV['CONSUMER_SECRET']
-  config.oauth_token        = ENV['REQUEST_TOKEN']
-  config.oauth_token_secret = ENV['REQUEST_SECRET']
+$twitter = Twitter::REST::Client.new do |config|
+  config.consumer_key        = ENV['CONSUMER_KEY']
+  config.consumer_secret     = ENV['CONSUMER_SECRET']
+  config.access_token        = ENV['REQUEST_TOKEN']
+  config.access_token_secret = ENV['REQUEST_SECRET']
 end
 
 configure do
@@ -88,6 +88,6 @@ post '/hook' do
   whisper_text = "#{whisper.name} (#{whisper.version}): #{whisper.url} #{whisper.info}"
   whisper_text = whisper_text[0, 120] + '…' if whisper_text.length > 140
 
-  response = Twitter.update(whisper_text)
+  response = $twitter.update(whisper_text)
   Log.info "TWEETED! #{response}"
 end
