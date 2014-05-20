@@ -86,7 +86,6 @@ post '/hook' do
   Log.info "created whisper: #{whisper.inspect}"
 
   whisper_text = "#{whisper.name} (#{whisper.version}): #{whisper.url} #{whisper.info}"
-  whisper_text = whisper_text[0, 120] + '…' if whisper_text.length > 140
 
   response = Twitter.update(whisper_text)
   Log.info "TWEETED! #{response}"
