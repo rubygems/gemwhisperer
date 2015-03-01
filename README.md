@@ -1,6 +1,8 @@
 gemwhisperer
 ============
 
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
 This is an example application that uses the RubyGems webhook system to post Twitter updates about gems.
 
 Check out more information about [webhooks](https://rubygems.org/pages/api_docs#webhook).
