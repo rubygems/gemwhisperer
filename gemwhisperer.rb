@@ -31,6 +31,7 @@ configure do
 end
 
 set :root, File.dirname(__FILE__)
+set :dump_errors, true
 
 configure :development do
   require 'sqlite3'
