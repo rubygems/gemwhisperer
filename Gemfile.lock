@@ -49,7 +49,7 @@ GEM
       memoizable (~> 0.4.0)
       naught (~> 1.0)
       simple_oauth (~> 0.2.0)
-    tzinfo (0.3.39)
+    tzinfo (0.3.61)
 
 PLATFORMS
   ruby
